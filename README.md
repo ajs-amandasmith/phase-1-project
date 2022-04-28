@@ -1,2 +1,3 @@
 # phase-1-project
-Flatiron Phase 1 Project
+## Choose Your Pokemon Team
+
