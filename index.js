@@ -1,5 +1,6 @@
-document.addEventListener('ContentLoad', () => {
-
+document.addEventListener('DOMContentLoaded', () => {
+  getPokeData();
+  submitPokeSearch();
 })
 
 function getPokeData() {
@@ -8,3 +9,10 @@ function getPokeData() {
   .then(data => console.log(data))
 }
 
+function submitPokeSearch() {
+  const submit = document.getElementById('submit');
+  submit.addEventListener('click', e => {
+    e.preventDefault();
+    console.log(e);
+  })
+}
