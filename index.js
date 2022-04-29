@@ -18,7 +18,6 @@ function submitPokeSearch() {
 
 function handlePokeSearch(event) {
   event.preventDefault();
-  const searchForm = document.getElementById('poke-form');
   const searchInput = document.getElementById('search');
   const pokemon = searchInput.value.toLowerCase();
   const searchList = document.getElementById('search-list');
@@ -32,5 +31,5 @@ function handlePokeSearch(event) {
     listItem.textContent = `${data.name[0].toUpperCase()}${data.name.slice(1)}`;
     searchList.append(listItem);
   })
-  searchForm.reset();
+  document.getElementById('poke-form').reset();
 }
