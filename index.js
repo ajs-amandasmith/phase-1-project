@@ -19,7 +19,7 @@ function submitPokeSearch() {
 function handlePokeSearch(event) {
   event.preventDefault();
   const searchInput = document.getElementById('search');
-  const pokemon = searchInput.value;
+  const pokemon = searchInput.value.toLowerCase();
   const searchList = document.getElementById('search-list');
   searchList.textContent = '';
   const listItem = document.createElement('li');
@@ -27,8 +27,8 @@ function handlePokeSearch(event) {
   .then(res => res.json())
   .then(data => {
     console.log('data', data);
-    listItem.textContent = data.name;
-    console.log(listItem.textContent);
+    console.log('data name', data.name)
+    listItem.textContent = `${data.name[0].toUpperCase()}${data.name.slice(1)}`;
     searchList.append(listItem);
   })
 }
