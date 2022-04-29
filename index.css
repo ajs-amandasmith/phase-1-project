@@ -11,3 +11,8 @@ header {
   margin-left: auto;
   margin-right: auto;
 }
+
+#pokemon-search {
+  display: block;
+  border: 2px;
+}
