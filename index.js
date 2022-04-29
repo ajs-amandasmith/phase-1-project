@@ -29,7 +29,11 @@ function handlePokeSearch(event) {
     console.log('data', data);
     console.log('data name', data.name)
     listItem.textContent = `${data.name[0].toUpperCase()}${data.name.slice(1)}`;
+    listItem.dataset.id = data.id;
     searchList.append(listItem);
   })
   document.getElementById('poke-form').reset();
 }
+
+// click on the name of the pokemon that shows up after being searched for
+// pokemon's data should appear in the pokedex article element
