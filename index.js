@@ -31,8 +31,16 @@ function handlePokeSearch(event) {
     listItem.textContent = `${data.name[0].toUpperCase()}${data.name.slice(1)}`;
     listItem.dataset.id = data.id;
     searchList.append(listItem);
+    clickPokeName();
   })
   document.getElementById('poke-form').reset();
+}
+
+function clickPokeName() {
+  const pokeList = document.getElementById('search-list');
+  const pokemon = [...pokeList.childNodes]
+  console.log(pokemon);
+  pokemon.map(poke => poke.addEventListener('click', e => console.log(e, poke)))
 }
 
 // click on the name of the pokemon that shows up after being searched for
