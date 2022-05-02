@@ -43,6 +43,22 @@ function clickPokeName(data) {
 function handlePokeName(e, data) {
   console.log('e', e);
   console.log('data', data);
+  const pokeName = document.getElementById('poke-name');
+  const pokeNum = document.getElementById('poke-number');
+  const pokeImg = document.getElementById('poke-img');
+  const pokeHeight = document.getElementById('poke-height');
+  const pokeWeight = document.getElementById('poke-weight');
+  const pokeGenders = document.getElementById('poke-genders');
+
+  console.log('species', data.species);
+
+  pokeName.textContent = `Name: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
+  pokeNum.textContent = `National #: ${data.id}`;
+  pokeImg.src = data.sprites.other['official-artwork'].front_default;
+  pokeImg.alt = `Image of ${data.name}`;
+  pokeHeight.textContent = `Height: ${(data.height * 3.937)} inches`;
+  pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
+  pokeGenders.textContent = `Genders: ${data.species.url}`
 }
 
 // click on the name of the pokemon that shows up after being searched for
