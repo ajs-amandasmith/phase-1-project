@@ -50,16 +50,20 @@ function handlePokeName(e, data) {
   const pokeWeight = document.getElementById('poke-weight');
   const pokeGenders = document.getElementById('poke-genders');
 
-  console.log('species', data.species);
-
   pokeName.textContent = `Name: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
   pokeNum.textContent = `National #: ${data.id}`;
   pokeImg.src = data.sprites.other['official-artwork'].front_default;
   pokeImg.alt = `Image of ${data.name}`;
   pokeHeight.textContent = `Height: ${(data.height * 3.937)} inches`;
   pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
-  pokeGenders.textContent = `Genders: ${data.species.url}`
+  // pokeGenders.textContent = `Genders: ${data.species.url}`
+
+  console.log('species', getPokeSpecies(data.id));
 }
 
-// click on the name of the pokemon that shows up after being searched for
-// pokemon's data should appear in the pokedex article element
+function getPokeSpecies(id) {
+  fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+  .then(res => res.json())
+  .then(data => console.log(data));
+}
+
