@@ -53,6 +53,7 @@ function handlePokeName(e, data, species) {
   const pokeWeight = document.getElementById('poke-weight');
   const pokeGenders = document.getElementById('poke-genders');
   const pokeTypes = document.getElementById('poke-types');
+  const pokeFlavorText = document.getElementById('poke-flavor-text')
 
   pokeName.textContent = `Name: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
   pokeNum.textContent = `National #: ${data.id}`;
@@ -62,15 +63,19 @@ function handlePokeName(e, data, species) {
   pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
   pokeGenders.textContent = getPokeGenders(species.gender_rate);
   pokeTypes.textContent = getPokeTypes(data.types)
+  pokeFlavorText.textContent = `${species.flavor_text_entries[0].flavor_text}`
   
 }
 
 function getPokeSpecies(pokemon) {
   fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`)
-  .then(res => res.json())
-  .then(data => {
-    clickPokeName(pokemon, data);
-    getPokeGenders(data.gender_rate);
+    .then(res => res.json())
+    .then(data => {
+      clickPokeName(pokemon, data);
+      getPokeGenders(data.gender_rate);
+
+      console.log('pokemon', pokemon);
+      console.log('species', data);
   });
 }
 
