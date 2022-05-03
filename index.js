@@ -28,6 +28,7 @@ function handlePokeSearch(event) {
   .then(data => {
     listItem.textContent = `${data.name[0].toUpperCase()}${data.name.slice(1)}`;
     listItem.dataset.id = data.id;
+    document.getElementById('click').textContent = "Click a Pok\xE9mon"
     searchList.append(listItem);
     getPokeSpecies(data);
     getPokeTypes(data.types);
