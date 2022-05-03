@@ -30,6 +30,7 @@ function handlePokeSearch(event) {
     listItem.dataset.id = data.id;
     searchList.append(listItem);
     getPokeSpecies(data);
+    getPokeTypes(data.types);
   })
   document.getElementById('poke-form').reset();
 }
@@ -43,14 +44,15 @@ function clickPokeName(data, species) {
 function handlePokeName(e, data, species) {
   console.log('e', e);
   console.log('data', data);
+  console.log('species', species)
+
   const pokeName = document.getElementById('poke-name');
   const pokeNum = document.getElementById('poke-number');
   const pokeImg = document.getElementById('poke-img');
   const pokeHeight = document.getElementById('poke-height');
   const pokeWeight = document.getElementById('poke-weight');
   const pokeGenders = document.getElementById('poke-genders');
-
-  console.log('species', species)
+  const pokeTypes = document.getElementById('poke-types');
 
   pokeName.textContent = `Name: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
   pokeNum.textContent = `National #: ${data.id}`;
@@ -59,6 +61,7 @@ function handlePokeName(e, data, species) {
   pokeHeight.textContent = `Height: ${(data.height * 3.937)} inches`;
   pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
   pokeGenders.textContent = getPokeGenders(species.gender_rate);
+  pokeTypes.textContent = getPokeTypes(data.types)
   
 }
 
@@ -66,14 +69,12 @@ function getPokeSpecies(pokemon) {
   fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`)
   .then(res => res.json())
   .then(data => {
-    console.log('species data', data);
     clickPokeName(pokemon, data);
-    return getPokeGenders(data.gender_rate);
+    getPokeGenders(data.gender_rate);
   });
 }
 
 function getPokeGenders(genderRate) {
-  console.log('genders genderRate', genderRate);
   switch (genderRate) {
     case -1:
       return `Gender: None`;
@@ -82,7 +83,15 @@ function getPokeGenders(genderRate) {
     case 8:
       return `Gender: Female`;
     default:
-      return `Genders: Male or Female`;
+      return `Genders: Male, Female`;
   }
 }
 
+function getPokeTypes(typeArray) {
+  const type = typeArray.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1));
+  if (type.length === 1) {
+    return `Type: ${type}`;
+  } else {
+    return `Types: ${type.join(', ')}`
+  }
+}
