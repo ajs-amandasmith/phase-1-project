@@ -29,19 +29,18 @@ function handlePokeSearch(event) {
     listItem.textContent = `${data.name[0].toUpperCase()}${data.name.slice(1)}`;
     listItem.dataset.id = data.id;
     searchList.append(listItem);
-    clickPokeName(data);
-    getPokeSpecies(data.id);
+    getPokeSpecies(data);
   })
   document.getElementById('poke-form').reset();
 }
 
-function clickPokeName(data) {
+function clickPokeName(data, species) {
   const pokeList = document.getElementById('search-list');
   const pokemon = [...pokeList.childNodes]
-  pokemon.map(poke => poke.addEventListener('click', e => handlePokeName(e, data)))
+  pokemon.map(poke => poke.addEventListener('click', e => handlePokeName(e, data, species)))
 }
 
-function handlePokeName(e, data) {
+function handlePokeName(e, data, species) {
   console.log('e', e);
   console.log('data', data);
   const pokeName = document.getElementById('poke-name');
@@ -51,7 +50,7 @@ function handlePokeName(e, data) {
   const pokeWeight = document.getElementById('poke-weight');
   const pokeGenders = document.getElementById('poke-genders');
 
-  console.log()
+  console.log('species', species)
 
   pokeName.textContent = `Name: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
   pokeNum.textContent = `National #: ${data.id}`;
@@ -59,17 +58,16 @@ function handlePokeName(e, data) {
   pokeImg.alt = `Image of ${data.name}`;
   pokeHeight.textContent = `Height: ${(data.height * 3.937)} inches`;
   pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
-  pokeGenders.textContent = getPokeSpecies(data.id);
-  
-  // console.log('gender', getPokeSpecies(data.id));
+  pokeGenders.textContent = getPokeGenders(species.gender_rate);
   
 }
 
-function getPokeSpecies(id) {
-  return fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+function getPokeSpecies(pokemon) {
+  fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`)
   .then(res => res.json())
   .then(data => {
     console.log('species data', data);
+    clickPokeName(pokemon, data);
     return getPokeGenders(data.gender_rate);
   });
 }
@@ -77,11 +75,11 @@ function getPokeSpecies(id) {
 function getPokeGenders(genderRate) {
   console.log('genders genderRate', genderRate);
   switch (genderRate) {
-    case genderRate === -1:
+    case -1:
       return `Gender: None`;
-    case genderRate === 0:
+    case 0:
       return `Gender: Male`;
-    case genderRate === 8:
+    case 8:
       return `Gender: Female`;
     default:
       return `Genders: Male or Female`;
