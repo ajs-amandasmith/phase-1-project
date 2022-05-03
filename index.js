@@ -30,6 +30,7 @@ function handlePokeSearch(event) {
     listItem.dataset.id = data.id;
     searchList.append(listItem);
     clickPokeName(data);
+    getPokeSpecies(data.id);
   })
   document.getElementById('poke-form').reset();
 }
@@ -50,20 +51,30 @@ function handlePokeName(e, data) {
   const pokeWeight = document.getElementById('poke-weight');
   const pokeGenders = document.getElementById('poke-genders');
 
+  console.log()
+
   pokeName.textContent = `Name: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
   pokeNum.textContent = `National #: ${data.id}`;
   pokeImg.src = data.sprites.other['official-artwork'].front_default;
   pokeImg.alt = `Image of ${data.name}`;
   pokeHeight.textContent = `Height: ${(data.height * 3.937)} inches`;
   pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
-  // pokeGenders.textContent = `Genders: ${data.species.url}`
-
-  console.log('species', getPokeSpecies(data.id));
+  pokeGenders.textContent = `Genders: ${data.species.url}`
+  
+  // console.log('gender', getPokeSpecies(data.id));
+  
 }
 
 function getPokeSpecies(id) {
-  fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+  return fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
   .then(res => res.json())
-  .then(data => console.log(data));
+  .then(data => {
+    console.log('data', data);
+    getPokeGenders(data.gender_rate);
+  });
 }
 
+function getPokeGenders(genderRate) {
+  console.log('genderRate', genderRate);
+  return genderRate;
+}
