@@ -59,7 +59,7 @@ function handlePokeName(e, data) {
   pokeImg.alt = `Image of ${data.name}`;
   pokeHeight.textContent = `Height: ${(data.height * 3.937)} inches`;
   pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
-  pokeGenders.textContent = `Genders: ${data.species.url}`
+  pokeGenders.textContent = getPokeSpecies(data.id);
   
   // console.log('gender', getPokeSpecies(data.id));
   
@@ -69,12 +69,22 @@ function getPokeSpecies(id) {
   return fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
   .then(res => res.json())
   .then(data => {
-    console.log('data', data);
-    getPokeGenders(data.gender_rate);
+    console.log('species data', data);
+    return getPokeGenders(data.gender_rate);
   });
 }
 
 function getPokeGenders(genderRate) {
-  console.log('genderRate', genderRate);
-  return genderRate;
+  console.log('genders genderRate', genderRate);
+  switch (genderRate) {
+    case genderRate === -1:
+      return `Gender: None`;
+    case genderRate === 0:
+      return `Gender: Male`;
+    case genderRate === 8:
+      return `Gender: Female`;
+    default:
+      return `Genders: Male or Female`;
+  }
 }
+
