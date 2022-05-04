@@ -56,16 +56,19 @@ function handlePokeName(e, data, species) {
   const pokeGenders = document.getElementById('poke-genders');
   const pokeTypes = document.getElementById('poke-types');
   const pokeFlavorText = document.getElementById('poke-flavor-text')
+  const addButton = document.getElementById('add-btn');
 
   pokeName.textContent = `Name: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
   pokeNum.textContent = `National #: ${data.id}`;
   pokeImg.src = data.sprites.other['official-artwork'].front_default;
   pokeImg.alt = `Image of ${data.name}`;
+  pokeImg.hidden = false;
   pokeHeight.textContent = `Height: ${(data.height * 3.937)} inches`;
   pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
   pokeGenders.textContent = getPokeGenders(species.gender_rate);
   pokeTypes.textContent = getPokeTypes(data.types)
   pokeFlavorText.textContent = `${species.flavor_text_entries[0].flavor_text}`
+  addButton.hidden = false;
   
 }
 
@@ -75,9 +78,6 @@ function getPokeSpecies(pokemon) {
     .then(data => {
       clickPokeName(pokemon, data);
       getPokeGenders(data.gender_rate);
-
-      console.log('pokemon', pokemon);
-      console.log('species', data);
   });
 }
 
