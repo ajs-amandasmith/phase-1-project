@@ -105,21 +105,39 @@ function getPokeTypes(typeArray) {
 }
 
 function getDefaultTeam() {
-  return fetch(`http://localhost:3000/team`)
+  fetch(`http://localhost:3000/team`)
     .then(res => res.json())
-    .then(data => showTeam(data))
+    .then(data => {
+      resetDeafaultTeam(data)
+      showTeam(data)
+    })
 }
 
 function showTeam(team) {
   const teamList = document.getElementById('poke-team');
   
   team.map(each => {
-    each.image = "./images/SugimoriPokeBall.png";
     const pokeball = document.createElement('img');
     pokeball.src = each.image;
     pokeball.className = 'team-member';
     teamList.append(pokeball);
   })
+}
+
+function patchDefaultTeam(id) {
+  fetch(`http://localhost:3000/team/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      image: './images/SugimoriPokeBAll.png'
+    })
+  })
+}
+
+function resetDeafaultTeam(team) {
+  team.forEach(member => patchDefaultTeam(member.id))
 }
 
 function handleAddButton(e) {
@@ -128,5 +146,13 @@ function handleAddButton(e) {
 }
 
 function addToTeam() {
-  getDefaultTeam.then(console.log(data))
+  // take the inputs from the 'add-poke' form and update one of the team objects
+  // grab the input form elements
+  // grab the data from the searched for pokemon
+  // grab an empty team object
+  // update team name with input nickname
+  // update team gender with chosen gender
+    // default if there isn't an option
+  // show pokemon image
+    // if shiny, show the shiny image
 }

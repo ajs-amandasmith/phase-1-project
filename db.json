@@ -1,22 +1,28 @@
 {
   "team": [
     {
-      "id": 1
+      "id": 1,
+      "image": "./images/SugimoriPokeBAll.png"
     },
     {
-      "id": 2
+      "id": 2,
+      "image": "./images/SugimoriPokeBAll.png"
     },
     {
-      "id": 3
+      "id": 3,
+      "image": "./images/SugimoriPokeBAll.png"
     },
     {
-      "id": 4
+      "id": 4,
+      "image": "./images/SugimoriPokeBAll.png"
     },
     {
-      "id": 5
+      "id": 5,
+      "image": "./images/SugimoriPokeBAll.png"
     },
     {
-      "id": 6
+      "id": 6,
+      "image": "./images/SugimoriPokeBAll.png"
     }
   ]
 }
