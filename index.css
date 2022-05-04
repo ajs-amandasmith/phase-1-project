@@ -16,3 +16,9 @@ header {
   display: block;
   border: 2px;
 }
+
+.team-member {
+  height: 100px;
+  width: 100x;
+  padding: 2px;
+}

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   submitPokeSearch();
-  showTeam();
+  getDefaultTeam();
 })
 
 function getPokeData(pokemon) {
@@ -103,8 +103,20 @@ function getPokeTypes(typeArray) {
   }
 }
 
-function showTeam() {
+function getDefaultTeam() {
   fetch(`http://localhost:3000/team`)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => showTeam(data))
+}
+
+function showTeam(team) {
+  const teamList = document.getElementById('poke-team');
+  
+  team.map(each => {
+    each.image = "./images/SugimoriPokeBall.png";
+    const pokeball = document.createElement('img');
+    pokeball.src = each.image;
+    pokeball.className = 'team-member';
+    teamList.append(pokeball);
+  })
 }
