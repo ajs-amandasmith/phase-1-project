@@ -24,20 +24,36 @@
       <h4 id="poke-weight">Weight: </h4>
       <h4 id="poke-genders">Gender(s): </h4>
       <h4 id="poke-types">Type(s): </h4>
-      <button id="add-btn" name="add-btn" hidden="true">Add Pok&eacute;mon?</button>
       <p id="poke-flavor-text">Flavor Text</p>
+      <button id="add-btn" name="add-btn" hidden="true">Add Pok&eacute;mon?</button>
+    </article>
 
+    <article id="add-to-team">
+      <form action="" method="GET" id="add-poke" hidden>
+        <label for="nickname">Give Your Pok&eacute;mon A Nickname?</label>
+        <input type="text" name="nickname" id="nickname" placeholder="Nickname Goes Here">
+        <label for="gender-select">Select A Gender</label>
+        <select id="gender-select">
+        </select>
+        <label for="is-shiny">Is Your Pok&eacute;mon A Shiny Varient?</label>
+        <select id="is-shiny">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        <input type="submit" name="submit-to-team" id="submit-to-team">
+      </form>
     </article>
 
     <article id="pokemon-search">
       <form action="" method="GET" id="poke-form">
-        <label for="poke-search">Pok&eacute; Search</label>
+        <label for="search">Pok&eacute; Search</label>
         <input type="text" name="search" id="search" placeholder="Search by name or number">
         <input type="submit" name="submit" id="submit">
       </form>
     </article>
 
-    <article>
+  
+
+    <article id="search-results">
       <h5 id="click"></h5>
       <ul id="search-list">
       </ul>
