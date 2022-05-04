@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   submitPokeSearch();
+  showTeam();
 })
 
 function getPokeData(pokemon) {
@@ -100,4 +101,10 @@ function getPokeTypes(typeArray) {
   } else {
     return `Types: ${type.join(', ')}`
   }
+}
+
+function showTeam() {
+  fetch(`http://localhost:3000/team`)
+    .then(res => res.json())
+    .then(data => console.log(data))
 }
