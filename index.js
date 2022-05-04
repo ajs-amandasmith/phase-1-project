@@ -13,8 +13,8 @@ function getPokeData(pokemon) {
 }
 
 function submitPokeSearch() {
-  const submit = document.getElementById('submit');
-  submit.addEventListener('click', e => handlePokeSearch(e))
+  const submit = document.getElementById('poke-form');
+  submit.addEventListener('submit', e => handlePokeSearch(e))
 }
 
 function handlePokeSearch(event) {
@@ -69,6 +69,7 @@ function handlePokeName(e, data, species) {
   pokeTypes.textContent = getPokeTypes(data.types)
   pokeFlavorText.textContent = `${species.flavor_text_entries[0].flavor_text}`
   addButton.hidden = false;
+  addButton.addEventListener('click', e => handleAddButton(e));
   
 }
 
@@ -104,7 +105,7 @@ function getPokeTypes(typeArray) {
 }
 
 function getDefaultTeam() {
-  fetch(`http://localhost:3000/team`)
+  return fetch(`http://localhost:3000/team`)
     .then(res => res.json())
     .then(data => showTeam(data))
 }
@@ -119,4 +120,13 @@ function showTeam(team) {
     pokeball.className = 'team-member';
     teamList.append(pokeball);
   })
+}
+
+function handleAddButton(e) {
+ const addPokeForm = document.getElementById('add-poke');
+ addPokeForm.hidden = false;
+}
+
+function addToTeam() {
+  getDefaultTeam.then(console.log(data))
 }
