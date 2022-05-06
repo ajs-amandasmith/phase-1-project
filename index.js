@@ -143,9 +143,26 @@ function resetDeafaultTeam(team) {
 function handleAddButton(e) {
  const addPokeForm = document.getElementById('add-poke');
  addPokeForm.hidden = false;
+ submitToTeam();
 }
 
-function addToTeam() {
+function submitToTeam() {
+  const addForm = document.getElementById('add-poke');
+  addForm.addEventListener('submit', e => handleSubmitToTeam(e))
+}
+
+function handleSubmitToTeam(e) {
+  e.preventDefault();
+
+  const nickname = document.getElementById('nickname');
+  const genderSelect = document.getElementById('gender-select');
+
+  document.getElementById('add-poke').reset();
+
+  console.log('handle', e);
+  console.log('nickname', nickname.value);
+
+
   // take the inputs from the 'add-poke' form and update one of the team objects
   // grab the input form elements
   // grab the data from the searched for pokemon
