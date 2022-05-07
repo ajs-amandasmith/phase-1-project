@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   submitPokeSearch();
   getDefaultTeam();
+  clickAddButton();
 })
 
 function getPokeData(pokemon) {
@@ -35,6 +36,8 @@ function handlePokeSearch(event) {
     getPokeTypes(data.types);
   })
   document.getElementById('poke-form').reset();
+  document.getElementById('add-poke').hidden = true;
+  document.getElementById('gender-select').replaceChildren('');
 }
 
 function clickPokeName(data, species) {
@@ -44,9 +47,9 @@ function clickPokeName(data, species) {
 }
 
 function handlePokeName(e, data, species) {
-  console.log('e', e);
-  console.log('data', data);
-  console.log('species', species)
+  // console.log('e poke name', e);
+  // console.log('data poke name', data);
+  // console.log('species poke name', species)
 
   const pokeName = document.getElementById('poke-name');
   const pokeNum = document.getElementById('poke-number');
@@ -69,8 +72,17 @@ function handlePokeName(e, data, species) {
   pokeTypes.textContent = getPokeTypes(data.types)
   pokeFlavorText.textContent = `${species.flavor_text_entries[0].flavor_text}`
   addButton.hidden = false;
-  addButton.addEventListener('click', e => handleAddButton(e));
-  
+  // document.getElementById('add-poke').reset();
+  // addButton.removeEventListener('click', e, false );
+  // addButton.addEventListener('click', e => {
+  //   console.log("i'm being called")
+  //   handleAddButton(e, data, species)
+  // });
+}
+
+function clickAddButton() {
+  const addButton = document.getElementById('add-btn');
+  addButton.addEventListener('click', e => handleAddButton(e))
 }
 
 function getPokeSpecies(pokemon) {
@@ -78,7 +90,9 @@ function getPokeSpecies(pokemon) {
     .then(res => res.json())
     .then(data => {
       clickPokeName(pokemon, data);
-      getPokeGenders(data.gender_rate);
+      // getPokeGenders(data.gender_rate);
+      submitToTeam(pokemon, data);
+      // clickAddButton(pokemon, data)
   });
 }
 
@@ -141,26 +155,31 @@ function resetDeafaultTeam(team) {
 }
 
 function handleAddButton(e) {
- const addPokeForm = document.getElementById('add-poke');
- addPokeForm.hidden = false;
- submitToTeam();
+  const addPokeForm = document.getElementById('add-poke');
+  addPokeForm.hidden = false;
+  const genders = document.getElementById('poke-genders');
+  console.log(genders.textContent);
+  const genderSelect = document.getElementById('gender-select');
+  pokeGenderOptions(genders.textContent).map(gender => genderSelect.append(gender));
+  addPokeForm.reset();
 }
 
-function submitToTeam() {
+function submitToTeam(data, species) {
   const addForm = document.getElementById('add-poke');
-  addForm.addEventListener('submit', e => handleSubmitToTeam(e))
+  addForm.addEventListener('submit', e => handleSubmitToTeam(e, data, species))
 }
 
-function handleSubmitToTeam(e) {
+function handleSubmitToTeam(e, data, species) {
   e.preventDefault();
 
   const nickname = document.getElementById('nickname');
-  const genderSelect = document.getElementById('gender-select');
 
   document.getElementById('add-poke').reset();
 
-  console.log('handle', e);
-  console.log('nickname', nickname.value);
+  // console.log('handle', e);
+  // console.log('nickname', nickname.value);
+  // console.log('data', data);
+  // console.log('species', species);
 
 
   // take the inputs from the 'add-poke' form and update one of the team objects
@@ -172,4 +191,26 @@ function handleSubmitToTeam(e) {
     // default if there isn't an option
   // show pokemon image
     // if shiny, show the shiny image
+}
+
+// conditional based on the text for genders, or use the rates from the species API
+
+function pokeGenderOptions(genders) {
+  let optionElement = document.createElement('option');
+  let optionElement2 = document.createElement('option');
+  switch (genders) {
+    case 'Gender: None':
+      optionElement.textContent = "None";
+      return [optionElement];
+    case 'Gender: Male':
+      optionElement.textContent = "Male";
+      return [optionElement];
+    case 'Gender: Female':
+      optionElement.textContent = "Female";
+      return [optionElement];
+    default:
+      optionElement.textContent = "Male";
+      optionElement2.textContent = "Female";
+      return [optionElement, optionElement2];
+  }
 }
