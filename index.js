@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   submitPokeSearch();
   getDefaultTeam();
   clickAddButton();
+  submitToTeam();
 })
 
 function getPokeData(pokemon) {
@@ -90,9 +91,6 @@ function getPokeSpecies(pokemon) {
     .then(res => res.json())
     .then(data => {
       clickPokeName(pokemon, data);
-      // getPokeGenders(data.gender_rate);
-      submitToTeam(pokemon, data);
-      // clickAddButton(pokemon, data)
   });
 }
 
@@ -158,29 +156,32 @@ function handleAddButton(e) {
   const addPokeForm = document.getElementById('add-poke');
   addPokeForm.hidden = false;
   const genders = document.getElementById('poke-genders');
-  console.log(genders.textContent);
   const genderSelect = document.getElementById('gender-select');
   pokeGenderOptions(genders.textContent).map(gender => genderSelect.append(gender));
   addPokeForm.reset();
 }
 
-function submitToTeam(data, species) {
+function submitToTeam() {
   const addForm = document.getElementById('add-poke');
-  addForm.addEventListener('submit', e => handleSubmitToTeam(e, data, species))
+  addForm.addEventListener('submit', e => handleSubmitToTeam(e))
 }
 
-function handleSubmitToTeam(e, data, species) {
+function handleSubmitToTeam(e) {
   e.preventDefault();
 
   const nickname = document.getElementById('nickname');
-
-  document.getElementById('add-poke').reset();
+  const genders = document.getElementById('gender-select');
+  const shiny = document.getElementById('is-shiny');
 
   // console.log('handle', e);
-  // console.log('nickname', nickname.value);
   // console.log('data', data);
   // console.log('species', species);
 
+  console.log('nickname', nickname.value);
+  console.log('genders', genders.options[genders.selectedIndex].textContent);
+  console.log('shiny', shiny.options[shiny.selectedIndex].textContent);
+
+  document.getElementById('add-poke').reset();
 
   // take the inputs from the 'add-poke' form and update one of the team objects
   // grab the input form elements
@@ -193,7 +194,9 @@ function handleSubmitToTeam(e, data, species) {
     // if shiny, show the shiny image
 }
 
-// conditional based on the text for genders, or use the rates from the species API
+function removeSubmitListener(form) {
+  form.removeEventListener('submit', handleSubmitToTeam, false);
+}
 
 function pokeGenderOptions(genders) {
   let optionElement = document.createElement('option');
