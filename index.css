@@ -12,9 +12,15 @@ header {
   margin-right: auto;
 }
 
-#pokemon-search {
-  display: block;
-  border: 2px;
+#poke-team {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.team-member h4 {
+  text-align: left;
+  padding: 1px;
 }
 
 .team-member-img {
@@ -22,3 +28,11 @@ header {
   width: 100x;
   padding: 2px;
 }
+
+#pokemon-search {
+  display: block;
+  border: 2px;
+}
+
+
+

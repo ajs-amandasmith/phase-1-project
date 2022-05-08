@@ -244,7 +244,7 @@ function pokeGenderOptions(genders) {
   }
 }
 
-function populateTeamMember(teamMember, nickname, gender, shiny) {
+function populateTeamMember(teamMember, nickname = 'none', gender, shiny) {
   const pokeID = document.getElementById('poke-number').dataset.id;
   const member = document.getElementById(`${teamMember.id}`);
   const memberImage = member.querySelector('img');
@@ -253,24 +253,14 @@ function populateTeamMember(teamMember, nickname, gender, shiny) {
   const pokeNickname = document.createElement('h4');
   const pokeGender = document.createElement('h4');
 
-  console.log('image', memberImage);
-  console.log('ID', pokeID);
-  console.log('team member', teamMember);
-  console.log('nickname', nickname);
-  console.log('gender', gender);
-  console.log('shiny', shiny);
-
   fetch(`https://pokeapi.co/api/v2/pokemon/${pokeID}`)
     .then(res => res.json())
     .then(data => {
-      console.log('data', data)
       const imageSrc = isShiny(shiny, data, gender);
-      console.log(imageSrc);
       memberImage.src = imageSrc;
       teamMember.name = data.name;
-      console.log('new member', teamMember);
 
-      pokeSpecies.textContent = `Pok\xE9mon: ${data.name}`;
+      pokeSpecies.textContent = `Pok\xE9mon: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
       pokeNickname.textContent = `Nickname: ${nickname}`;
       pokeGender.textContent = `Gender: ${gender}`;
 
@@ -278,14 +268,6 @@ function populateTeamMember(teamMember, nickname, gender, shiny) {
 
       patchNewMember(teamMember.id, data.name, memberImage.src);
     });
-
-
-  // take the inputs from the 'add-poke' form and update one of the team objects
-  // update team name with input nickname
-  // update team gender with chosen gender
-    // default if there isn't an option
-  // show pokemon image
-    // if shiny, show the shiny image
 }
 
 function patchNewMember(id, newName, newImage) {

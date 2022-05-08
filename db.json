@@ -2,8 +2,8 @@
   "team": [
     {
       "id": 1,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/87.png",
-      "name": "dewgong",
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": "",
       "nickname": "",
       "gender": "",
       "isShiny": ""
