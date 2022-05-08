@@ -220,6 +220,7 @@ function populateTeamMember(teamMember, nickname, gender, shiny) {
       memberImage.src = imageSrc;
       teamMember.name = data.name;
       console.log('new member', teamMember);
+      patchNewMember(teamMember.id, data.name, memberImage.src);
     });
 
 
@@ -245,8 +246,11 @@ function isShiny(shiny, pokemon, gender) {
 
 function isFemale(gender, pokemon) {
   image = '';
-  if (gender === "Female") {
+  if (gender === "Female" && pokemon.sprites.front_default !== null) {
     image = pokemon.sprites.front_default;
+    return image;
+  } else if (gender === "Female") {
+    image = pokemon.sprites.front_female;
     return image;
   } else {
     image = pokemon.sprites.front_default;
@@ -272,4 +276,20 @@ function pokeGenderOptions(genders) {
       optionElement2.textContent = "Female";
       return [optionElement, optionElement2];
   }
+}
+
+function patchNewMember(id, newName, newImage) {
+  console.log('patch id', id);
+  console.log('patch name', newName);
+  console.log('patch image', newImage);
+  fetch(`http://localhost:3000/team/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      image: newImage,
+      name: newName
+    })
+  })
 }
