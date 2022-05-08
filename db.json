@@ -2,33 +2,51 @@
   "team": [
     {
       "id": 1,
-      "image": "./images/SugimoriPokeBAll.png",
-      "name": ""
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/87.png",
+      "name": "dewgong",
+      "nickname": "",
+      "gender": "",
+      "isShiny": ""
     },
     {
       "id": 2,
       "image": "./images/SugimoriPokeBAll.png",
-      "name": ""
+      "name": "",
+      "nickname": "",
+      "gender": "",
+      "isShiny": ""
     },
     {
       "id": 3,
       "image": "./images/SugimoriPokeBAll.png",
-      "name": ""
+      "name": "",
+      "nickname": "",
+      "gender": "",
+      "isShiny": ""
     },
     {
       "id": 4,
       "image": "./images/SugimoriPokeBAll.png",
-      "name": ""
+      "name": "",
+      "nickname": "",
+      "gender": "",
+      "isShiny": ""
     },
     {
       "id": 5,
       "image": "./images/SugimoriPokeBAll.png",
-      "name": ""
+      "name": "",
+      "nickname": "",
+      "gender": "",
+      "isShiny": ""
     },
     {
       "id": 6,
       "image": "./images/SugimoriPokeBAll.png",
-      "name": ""
+      "name": "",
+      "nickname": "",
+      "gender": "",
+      "isShiny": ""
     }
   ]
 }

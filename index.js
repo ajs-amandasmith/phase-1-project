@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   submitPokeSearch();
-  getDefaultTeam();
   clickAddButton();
   submitToTeam();
+  resetDefaultTeam();
+  getDefaultTeam();
 })
 
 // function getPokeData(pokemon) {
@@ -111,14 +112,12 @@ function getDefaultTeam() {
   fetch(`http://localhost:3000/team`)
     .then(res => res.json())
     .then(data => {
-      resetDeafaultTeam(data)
       showTeam(data)
     })
 }
 
 function showTeam(team) {
   const teamList = document.getElementById('poke-team');
-  
   
   team.map(each => {
     const pokeball = document.createElement('img');
@@ -145,8 +144,10 @@ function patchDefaultTeam(id) {
   })
 }
 
-function resetDeafaultTeam(team) {
-  team.forEach(member => patchDefaultTeam(member.id))
+function resetDefaultTeam(team) {
+  for (let i = 1; i < 7; i++) {
+    patchDefaultTeam(i);
+  }
 }
 
 function handleAddButton(e) {
@@ -180,6 +181,7 @@ function handleSubmitToTeam(e) {
   form.reset();
   form.hidden = true;
   document.getElementById('gender-select').replaceChildren('');
+  document.getElementById('add-btn').hidden = true;
 }
 
 function updateTeam(nickname, gender, shiny) {
@@ -196,42 +198,6 @@ function updateTeam(nickname, gender, shiny) {
         }
       }
     })
-}
-
-function populateTeamMember(teamMember, nickname, gender, shiny) {
-  const pokeID = document.getElementById('poke-number').dataset.id;
-
-  const member = document.getElementById(`${teamMember.id}`);
-  const memberImage = member.querySelector('img');
-
-  console.log('image', memberImage);
-  console.log('ID', pokeID);
-  console.log('team member', teamMember);
-  console.log('nickname', nickname);
-  console.log('gender', gender);
-  console.log('shiny', shiny);
-
-  fetch(`https://pokeapi.co/api/v2/pokemon/${pokeID}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log('data', data)
-      const imageSrc = isShiny(shiny, data, gender);
-      console.log(imageSrc);
-      memberImage.src = imageSrc;
-      teamMember.name = data.name;
-      console.log('new member', teamMember);
-      patchNewMember(teamMember.id, data.name, memberImage.src);
-    });
-
-
-  // take the inputs from the 'add-poke' form and update one of the team objects
-  // grab the data from the searched for pokemon
-  // grab an empty team object
-  // update team name with input nickname
-  // update team gender with chosen gender
-    // default if there isn't an option
-  // show pokemon image
-    // if shiny, show the shiny image
 }
 
 function isShiny(shiny, pokemon, gender) {
@@ -278,6 +244,50 @@ function pokeGenderOptions(genders) {
   }
 }
 
+function populateTeamMember(teamMember, nickname, gender, shiny) {
+  const pokeID = document.getElementById('poke-number').dataset.id;
+  const member = document.getElementById(`${teamMember.id}`);
+  const memberImage = member.querySelector('img');
+
+  const pokeSpecies = document.createElement('h4');
+  const pokeNickname = document.createElement('h4');
+  const pokeGender = document.createElement('h4');
+
+  console.log('image', memberImage);
+  console.log('ID', pokeID);
+  console.log('team member', teamMember);
+  console.log('nickname', nickname);
+  console.log('gender', gender);
+  console.log('shiny', shiny);
+
+  fetch(`https://pokeapi.co/api/v2/pokemon/${pokeID}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log('data', data)
+      const imageSrc = isShiny(shiny, data, gender);
+      console.log(imageSrc);
+      memberImage.src = imageSrc;
+      teamMember.name = data.name;
+      console.log('new member', teamMember);
+
+      pokeSpecies.textContent = `Pok\xE9mon: ${data.name}`;
+      pokeNickname.textContent = `Nickname: ${nickname}`;
+      pokeGender.textContent = `Gender: ${gender}`;
+
+      member.append(pokeSpecies, pokeNickname, pokeGender);
+
+      patchNewMember(teamMember.id, data.name, memberImage.src);
+    });
+
+
+  // take the inputs from the 'add-poke' form and update one of the team objects
+  // update team name with input nickname
+  // update team gender with chosen gender
+    // default if there isn't an option
+  // show pokemon image
+    // if shiny, show the shiny image
+}
+
 function patchNewMember(id, newName, newImage) {
   console.log('patch id', id);
   console.log('patch name', newName);
@@ -289,7 +299,10 @@ function patchNewMember(id, newName, newImage) {
     },
     body: JSON.stringify({
       image: newImage,
-      name: newName
+      name: newName,
+      nickname: '',
+      gender: '',
+      isShiny: '',
     })
   })
 }
