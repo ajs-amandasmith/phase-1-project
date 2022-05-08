@@ -119,12 +119,16 @@ function getDefaultTeam() {
 function showTeam(team) {
   const teamList = document.getElementById('poke-team');
   
+  
   team.map(each => {
     const pokeball = document.createElement('img');
+    const div = document.createElement('div');
     pokeball.src = each.image;
-    pokeball.dataset.id = each.id;
-    pokeball.className = 'team-member';
-    teamList.append(pokeball);
+    pokeball.className = 'team-member-img';
+    div.id = each.id;
+    div.className = 'team-member';
+    div.append(pokeball);
+    teamList.append(div);
   })
 }
 
@@ -184,6 +188,7 @@ function updateTeam(nickname, gender, shiny) {
     .then(team => {
       for (let i = 0; i < team.length; i++) {
         if (team[i].name === '') {
+          console.log('current member', team[i])
           populateTeamMember(team[i], nickname, gender, shiny);
           break;
         } else {
@@ -196,8 +201,10 @@ function updateTeam(nickname, gender, shiny) {
 function populateTeamMember(teamMember, nickname, gender, shiny) {
   const pokeID = document.getElementById('poke-number').dataset.id;
 
-  const teamImage = document.getElementsByClass('team-member')
+  const member = document.getElementById(`${teamMember.id}`);
+  const memberImage = member.querySelector('img');
 
+  console.log('image', memberImage);
   console.log('ID', pokeID);
   console.log('team member', teamMember);
   console.log('nickname', nickname);
@@ -208,7 +215,11 @@ function populateTeamMember(teamMember, nickname, gender, shiny) {
     .then(res => res.json())
     .then(data => {
       console.log('data', data)
-      isShiny(shiny, data, gender);
+      const imageSrc = isShiny(shiny, data, gender);
+      console.log(imageSrc);
+      memberImage.src = imageSrc;
+      teamMember.name = data.name;
+      console.log('new member', teamMember);
     });
 
 
@@ -223,18 +234,23 @@ function populateTeamMember(teamMember, nickname, gender, shiny) {
 }
 
 function isShiny(shiny, pokemon, gender) {
+  image = '';
   if (shiny === "Yes") {
-    console.log(pokemon.sprites.front_shiny);
+    image = pokemon.sprites.front_shiny;
+    return image;
   } else {
-    isFemale(gender, pokemon)
+    return isFemale(gender, pokemon)
   }
 }
 
 function isFemale(gender, pokemon) {
+  image = '';
   if (gender === "Female") {
-    console.log(pokemon.sprites.front_female);
+    image = pokemon.sprites.front_default;
+    return image;
   } else {
-    console.log(pokemon.sprites.front_default);
+    image = pokemon.sprites.front_default;
+    return image;
   }
 }
 
