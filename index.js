@@ -143,7 +143,8 @@ function patchDefaultTeam(id) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      image: './images/SugimoriPokeBAll.png'
+      image: './images/SugimoriPokeBAll.png',
+      name: ''
     })
   })
 }
@@ -173,13 +174,11 @@ function handleSubmitToTeam(e) {
   const genders = document.getElementById('gender-select');
   const shiny = document.getElementById('is-shiny');
 
-  // console.log('handle', e);
-  // console.log('data', data);
-  // console.log('species', species);
-
   console.log('nickname', nickname.value);
   console.log('genders', genders.options[genders.selectedIndex].textContent);
   console.log('shiny', shiny.options[shiny.selectedIndex].textContent);
+
+  updateTeam();
 
   document.getElementById('add-poke').reset();
 
@@ -194,8 +193,14 @@ function handleSubmitToTeam(e) {
     // if shiny, show the shiny image
 }
 
-function removeSubmitListener(form) {
-  form.removeEventListener('submit', handleSubmitToTeam, false);
+function updateTeam() {
+  fetch(`http://localhost:3000/team`)
+    .then(res => res.json())
+    .then(team => {
+      console.log(team)
+      team.map(member => console.log(member))
+      
+    })
 }
 
 function pokeGenderOptions(genders) {

@@ -2,27 +2,33 @@
   "team": [
     {
       "id": 1,
-      "image": "./images/SugimoriPokeBAll.png"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 2,
-      "image": "./images/SugimoriPokeBAll.png"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 3,
-      "image": "./images/SugimoriPokeBAll.png"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 4,
-      "image": "./images/SugimoriPokeBAll.png"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 5,
-      "image": "./images/SugimoriPokeBAll.png"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 6,
-      "image": "./images/SugimoriPokeBAll.png"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     }
   ]
 }
