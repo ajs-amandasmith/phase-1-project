@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
   submitToTeam();
 })
 
-function getPokeData(pokemon) {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-  .then(res => res.json())
-  .then(data => {
-    console.log(data)
-    return pokemon;
-  })
-}
+// function getPokeData(pokemon) {
+//   fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+//   .then(res => res.json())
+//   .then(data => {
+//     console.log(data)
+//     return pokemon;
+//   })
+// }
 
 function submitPokeSearch() {
   const submit = document.getElementById('poke-form');
@@ -38,7 +38,6 @@ function handlePokeSearch(event) {
   })
   document.getElementById('poke-form').reset();
   document.getElementById('add-poke').hidden = true;
-  document.getElementById('gender-select').replaceChildren('');
 }
 
 function clickPokeName(data, species) {
@@ -48,10 +47,6 @@ function clickPokeName(data, species) {
 }
 
 function handlePokeName(e, data, species) {
-  // console.log('e poke name', e);
-  // console.log('data poke name', data);
-  // console.log('species poke name', species)
-
   const pokeName = document.getElementById('poke-name');
   const pokeNum = document.getElementById('poke-number');
   const pokeImg = document.getElementById('poke-img');
@@ -64,6 +59,7 @@ function handlePokeName(e, data, species) {
 
   pokeName.textContent = `Name: ${data.name[0].toUpperCase()}${data.name.slice(1)}`;
   pokeNum.textContent = `National #: ${data.id}`;
+  pokeNum.dataset.id = data.id;
   pokeImg.src = data.sprites.other['official-artwork'].front_default;
   pokeImg.alt = `Image of ${data.name}`;
   pokeImg.hidden = false;
@@ -73,12 +69,7 @@ function handlePokeName(e, data, species) {
   pokeTypes.textContent = getPokeTypes(data.types)
   pokeFlavorText.textContent = `${species.flavor_text_entries[0].flavor_text}`
   addButton.hidden = false;
-  // document.getElementById('add-poke').reset();
-  // addButton.removeEventListener('click', e, false );
-  // addButton.addEventListener('click', e => {
-  //   console.log("i'm being called")
-  //   handleAddButton(e, data, species)
-  // });
+  document.getElementById('gender-select').replaceChildren('');
 }
 
 function clickAddButton() {
@@ -131,6 +122,7 @@ function showTeam(team) {
   team.map(each => {
     const pokeball = document.createElement('img');
     pokeball.src = each.image;
+    pokeball.dataset.id = each.id;
     pokeball.className = 'team-member';
     teamList.append(pokeball);
   })
@@ -174,16 +166,53 @@ function handleSubmitToTeam(e) {
   const genders = document.getElementById('gender-select');
   const shiny = document.getElementById('is-shiny');
 
-  console.log('nickname', nickname.value);
-  console.log('genders', genders.options[genders.selectedIndex].textContent);
-  console.log('shiny', shiny.options[shiny.selectedIndex].textContent);
+  const nicknameValue = nickname.value;
+  const genderSelected = genders.options[genders.selectedIndex].textContent;
+  const isShiny = shiny.options[shiny.selectedIndex].textContent;
 
-  updateTeam();
+  updateTeam(nicknameValue, genderSelected, isShiny);
 
-  document.getElementById('add-poke').reset();
+  const form = document.getElementById('add-poke');
+  form.reset();
+  form.hidden = true;
+  document.getElementById('gender-select').replaceChildren('');
+}
+
+function updateTeam(nickname, gender, shiny) {
+  fetch(`http://localhost:3000/team`)
+    .then(res => res.json())
+    .then(team => {
+      for (let i = 0; i < team.length; i++) {
+        if (team[i].name === '') {
+          populateTeamMember(team[i], nickname, gender, shiny);
+          break;
+        } else {
+          console.log('Your team is full');
+        }
+      }
+    })
+}
+
+function populateTeamMember(teamMember, nickname, gender, shiny) {
+  const pokeID = document.getElementById('poke-number').dataset.id;
+
+  const teamImage = document.getElementsByClass('team-member')
+
+  console.log('ID', pokeID);
+  console.log('team member', teamMember);
+  console.log('nickname', nickname);
+  console.log('gender', gender);
+  console.log('shiny', shiny);
+
+  fetch(`https://pokeapi.co/api/v2/pokemon/${pokeID}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log('data', data)
+      isShiny(shiny, data, gender);
+    });
+
 
   // take the inputs from the 'add-poke' form and update one of the team objects
-  // grab the input form elements
   // grab the data from the searched for pokemon
   // grab an empty team object
   // update team name with input nickname
@@ -193,14 +222,20 @@ function handleSubmitToTeam(e) {
     // if shiny, show the shiny image
 }
 
-function updateTeam() {
-  fetch(`http://localhost:3000/team`)
-    .then(res => res.json())
-    .then(team => {
-      console.log(team)
-      team.map(member => console.log(member))
-      
-    })
+function isShiny(shiny, pokemon, gender) {
+  if (shiny === "Yes") {
+    console.log(pokemon.sprites.front_shiny);
+  } else {
+    isFemale(gender, pokemon)
+  }
+}
+
+function isFemale(gender, pokemon) {
+  if (gender === "Female") {
+    console.log(pokemon.sprites.front_female);
+  } else {
+    console.log(pokemon.sprites.front_default);
+  }
 }
 
 function pokeGenderOptions(genders) {
