@@ -17,14 +17,22 @@
     </article>
 
     <article id="pokedex">
-      <h1 id="poke-name">Name: </h1>
-      <h3 id="poke-number">National #<h3>
-      <img src="" alt="blank" id="poke-img" height="200px" width="200px" hidden="true"></img>
-      <h4 id="poke-height">Height: </h4>
-      <h4 id="poke-weight">Weight: </h4>
-      <h4 id="poke-genders">Gender(s): </h4>
-      <h4 id="poke-types">Type(s): </h4>
-      <p id="poke-flavor-text">Flavor Text</p>
+      <div id="poke-heading">
+        <h1 id="poke-name">Name: </h1>
+        <h3 id="poke-number">National #: </h3>
+      </div>
+      <div id="img-div">
+        <img src="" alt="blank" id="poke-img" height="200px" width="200px" hidden="true"></img>
+      </div>
+      <div id="poke-stats">
+        <h4 id="poke-height">Height: </h4>
+        <h4 id="poke-weight">Weight: </h4>
+        <h4 id="poke-genders">Gender(s): </h4>
+        <h4 id="poke-types">Type(s): </h4>
+      </div>
+      <div id="flavor">
+        <p id="poke-flavor-text">Flavor Text: </p>
+      </div>
       <button id="add-btn" name="add-btn" hidden="true">Add Pok&eacute;mon?</button>
     </article>
 
@@ -32,9 +40,11 @@
       <form action="" method="GET" id="add-poke" hidden>
         <label for="nickname">Give Your Pok&eacute;mon A Nickname?</label>
         <input type="text" name="nickname" id="nickname" placeholder="Nickname Goes Here">
+        <br />
         <label for="gender-select">Select A Gender</label>
         <select id="gender-select">
         </select>
+        <br />
         <label for="is-shiny">Is Your Pok&eacute;mon A Shiny Varient?</label>
         <select id="is-shiny">
           <option value="no">No</option>

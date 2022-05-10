@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   submitToTeam();
   resetDefaultTeam();
   getDefaultTeam();
+  // document.getElementById('pokedex').hidden = true;
 })
 
 // function getPokeData(pokemon) {
@@ -64,13 +65,14 @@ function handlePokeName(e, data, species) {
   pokeImg.src = data.sprites.other['official-artwork'].front_default;
   pokeImg.alt = `Image of ${data.name}`;
   pokeImg.hidden = false;
-  pokeHeight.textContent = `Height: ${(data.height * 3.937)} inches`;
-  pokeWeight.textContent = `Weight: ${(data.weight / 4.536)} pounds`;
+  pokeHeight.textContent = `Height: ${(data.height * 3.937).toFixed(2)} inches`;
+  pokeWeight.textContent = `Weight: ${(data.weight / 4.536).toFixed(2)} pounds`;
   pokeGenders.textContent = getPokeGenders(species.gender_rate);
   pokeTypes.textContent = getPokeTypes(data.types)
   pokeFlavorText.textContent = `${species.flavor_text_entries[0].flavor_text}`
   addButton.hidden = false;
   document.getElementById('gender-select').replaceChildren('');
+  document.getElementById('pokedex').hidden = false;
 }
 
 function clickAddButton() {
