@@ -214,10 +214,7 @@ function isShiny(shiny, pokemon, gender) {
 
 function isFemale(gender, pokemon) {
   image = '';
-  if (gender === "Female" && pokemon.sprites.front_default !== null) {
-    image = pokemon.sprites.front_default;
-    return image;
-  } else if (gender === "Female") {
+  if (gender === "Female" && pokemon.sprites.front_female !== null) {
     image = pokemon.sprites.front_female;
     return image;
   } else {
