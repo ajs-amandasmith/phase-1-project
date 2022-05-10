@@ -248,6 +248,7 @@ function populateTeamMember(teamMember, nickname = 'none', gender, shiny) {
   const member = document.getElementById(`${teamMember.id}`);
   const memberImage = member.querySelector('img');
 
+  const div = document.createElement('div');
   const pokeSpecies = document.createElement('h4');
   const pokeNickname = document.createElement('h4');
   const pokeGender = document.createElement('h4');
@@ -263,7 +264,9 @@ function populateTeamMember(teamMember, nickname = 'none', gender, shiny) {
       pokeNickname.textContent = `Nickname: ${nickname}`;
       pokeGender.textContent = `Gender: ${gender}`;
 
-      member.append(pokeSpecies, pokeNickname, pokeGender);
+      div.className = "memberStats";
+      div.append(pokeSpecies, pokeNickname, pokeGender);
+      member.append(div);
 
       patchNewMember(teamMember.id, data.name, memberImage.src);
     });

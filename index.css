@@ -51,21 +51,32 @@ header {
 #nickname {
   padding: 2px;
   border: 2px solid #6495ED;
+  border-radius: 4px;
 }
 
 #gender-select {
   padding: 2px;
   border: 2px solid #6495ED;
+  border-radius: 4px;
 }
 
 #is-shiny {
   padding: 2px;
   border: 2px solid #6495ED;
+  border-radius: 4px;
 }
 
 #submit-to-team {
   padding: 2px;
   border: 2px solid #6495ED;
+  border-radius: 4px;
+  background: #FAEBD7;
+  display: block;
+  padding: 5px;
+  width: 25%;
+  font-size: 100%;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 
 #pokemon-search {
