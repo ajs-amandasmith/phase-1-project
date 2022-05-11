@@ -175,15 +175,6 @@ function updateTeam(nickname, gender, shiny) {
     })
 }
 
-function ifTeamIsFull() {
-  const team = document.getElementById('poke-team');
-  const teamArray = [...team.children];
-  const find = teamArray.find(member => member.children.length === 1);
-  if (find === undefined) {
-    window.alert("Your Team is Full!");
-  }
- }
-
 function populateTeamMember(teamMember, nickname = 'none', gender, shiny) {
   const pokeID = document.getElementById('poke-number').dataset.id;
   const member = document.getElementById(`${teamMember.id}`);
@@ -246,6 +237,17 @@ function patchNewMember(id, newName, newImage) {
     })
   })
 }
+
+// function for when the team is full
+function ifTeamIsFull() {
+  const team = document.getElementById('poke-team');
+  const teamArray = [...team.children];
+  // the length of the children becomees 2 after a member is added
+  const find = teamArray.find(member => member.children.length === 1);
+  if (find === undefined) {
+    window.alert("Your Team is Full!");
+  }
+ }
 
 // loading the pokeballs on load and refresh
 function getDefaultTeam() {
