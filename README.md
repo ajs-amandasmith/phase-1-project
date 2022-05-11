@@ -1,6 +1,10 @@
 # phase-1-project
 ## Choose Your Pokemon Team
 
+### Installation
+json-server is needed to work properly
+https://www.npmjs.com/package/json-server
+
 ### Usage
 
 This is a way to choose your own Pokemon team.
