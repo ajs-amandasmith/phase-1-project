@@ -3,50 +3,32 @@
     {
       "id": 1,
       "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "name": "bulbasaur",
-      "nickname": "",
-      "gender": "",
-      "isShiny": ""
+      "name": "bulbasaur"
     },
     {
       "id": 2,
-      "image": "./images/SugimoriPokeBAll.png",
-      "name": "",
-      "nickname": "",
-      "gender": "",
-      "isShiny": ""
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "name": "bulbasaur"
     },
     {
       "id": 3,
-      "image": "./images/SugimoriPokeBAll.png",
-      "name": "",
-      "nickname": "",
-      "gender": "",
-      "isShiny": ""
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "name": "bulbasaur"
     },
     {
       "id": 4,
-      "image": "./images/SugimoriPokeBAll.png",
-      "name": "",
-      "nickname": "",
-      "gender": "",
-      "isShiny": ""
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "name": "bulbasaur"
     },
     {
       "id": 5,
-      "image": "./images/SugimoriPokeBAll.png",
-      "name": "",
-      "nickname": "",
-      "gender": "",
-      "isShiny": ""
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "name": "bulbasaur"
     },
     {
       "id": 6,
-      "image": "./images/SugimoriPokeBAll.png",
-      "name": "",
-      "nickname": "",
-      "gender": "",
-      "isShiny": ""
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "name": "bulbasaur"
     }
   ]
 }

@@ -1,7 +1,7 @@
 # phase-1-project
 ## Choose Your Pokemon Team
 
-### Instructions
+### Usage
 
 This is a way to choose your own Pokemon team.
 
