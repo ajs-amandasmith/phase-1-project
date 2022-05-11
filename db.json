@@ -2,7 +2,7 @@
   "team": [
     {
       "id": 1,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
       "name": "bulbasaur",
       "nickname": "",
       "gender": "",
@@ -10,16 +10,16 @@
     },
     {
       "id": 2,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png",
-      "name": "porygon",
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": "",
       "nickname": "",
       "gender": "",
       "isShiny": ""
     },
     {
       "id": 3,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/25.png",
-      "name": "pikachu",
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": "",
       "nickname": "",
       "gender": "",
       "isShiny": ""
