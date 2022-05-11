@@ -26,7 +26,9 @@ header {
 
 .team-member h4 {
   text-align: left;
-  padding: 1px;
+  padding: 0px;
+  margin: 0px;
+  font-family: Arial;
 }
 
 .team-member-img {
