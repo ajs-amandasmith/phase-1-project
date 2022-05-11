@@ -104,12 +104,14 @@ function clickAddButton() {
 }
 
 function handleAddButton(e) {
+  console.log('peace');
   const addPokeForm = document.getElementById('add-poke');
   addPokeForm.hidden = false;
   const genders = document.getElementById('poke-genders');
   const genderSelect = document.getElementById('gender-select');
   pokeGenderOptions(genders.textContent).map(gender => genderSelect.append(gender));
   addPokeForm.reset();
+  ifTeamIsFull();
 }
 
 function pokeGenderOptions(genders) {
@@ -163,16 +165,24 @@ function updateTeam(nickname, gender, shiny) {
     .then(res => res.json())
     .then(team => {
       for (let i = 0; i < team.length; i++) {
-        if (team[i].name === '') {
-          console.log('current member', team[i])
+        if (team[i].name !== '') {
+          continue;
+        } else if (team[i].name === '') {
           populateTeamMember(team[i], nickname, gender, shiny);
           break;
-        } else {
-          console.log('Your team is full');
         }
       }
     })
 }
+
+function ifTeamIsFull() {
+  const team = document.getElementById('poke-team');
+  const teamArray = [...team.children];
+  const find = teamArray.find(member => member.children.length === 1);
+  if (find === undefined) {
+    window.alert("Your Team is Full!");
+  }
+ }
 
 function populateTeamMember(teamMember, nickname = 'none', gender, shiny) {
   const pokeID = document.getElementById('poke-number').dataset.id;
@@ -225,9 +235,6 @@ function isFemale(gender, pokemon) {
 }
 
 function patchNewMember(id, newName, newImage) {
-  console.log('patch id', id);
-  console.log('patch name', newName);
-  console.log('patch image', newImage);
   fetch(`http://localhost:3000/team/${id}`, {
     method: 'PATCH',
     headers: {
