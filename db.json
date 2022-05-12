@@ -2,33 +2,33 @@
   "team": [
     {
       "id": 1,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "name": "bulbasaur"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 2,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "name": "bulbasaur"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 3,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "name": "bulbasaur"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 4,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "name": "bulbasaur"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 5,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "name": "bulbasaur"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     },
     {
       "id": 6,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "name": "bulbasaur"
+      "image": "./images/SugimoriPokeBAll.png",
+      "name": ""
     }
   ]
 }
